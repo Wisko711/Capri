@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>CAPRI</title>
+<style>
+  html,body{margin:0;height:100%;background:#07070b;display:grid;place-items:center;
+    font-family:"Courier New",monospace;color:#fff}
+  .card{width:min(560px,92vw);padding:26px;background:#0d0d14;
+    border:3px solid #7c5cff;box-shadow:0 0 30px #7c5cff55;
+    clip-path:polygon(0 0,100% 0,100% 88%,94% 100%,0 100%)}
+  .top{display:flex;gap:18px;align-items:center}
+  .face{width:92px;height:92px;flex:none;animation:bob 2s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(-6px) rotate(-2deg)}}
+  .tag{font-size:14px;letter-spacing:3px;color:#aaa}
+  .tag b{color:#fff}
+  .run{display:inline-block;margin-left:10px;padding:2px 10px;background:#39ff88;
+    color:#031;font-weight:700;font-size:12px;animation:blink 1.4s infinite}
+  @keyframes blink{50%{opacity:.5}}
+  h1{font-size:24px;margin:10px 0 0;line-height:1.25}
+  hr{border:0;border-top:1px solid #333;margin:20px 0}
+  .row{display:flex;gap:30px;margin:8px 0;font-size:17px}
+  .row i{font-style:normal;color:#39ff88;font-weight:700;width:60px}
+  .eye{animation:look 4s infinite}
+  @keyframes look{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+  .eye{transform-box:fill-box;transform-origin:center}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="top">
+    <svg class="face" viewBox="0 0 100 100">
+      <polygon points="5,35 15,5 30,25 45,0 58,25 78,3 85,30 98,20 95,50 5,50" fill="#ff3b2f"/>
+      <rect x="10" y="30" width="80" height="62" rx="8" fill="#39ff88" stroke="#7c5cff" stroke-width="4"/>
+      <circle class="eye" cx="33" cy="58" r="12" fill="#2f8bff" stroke="#fff" stroke-width="3"/>
+      <circle class="eye" cx="67" cy="58" r="12" fill="#2f8bff" stroke="#fff" stroke-width="3"/>
+      <polyline points="25,80 38,72 48,82 60,72 75,80" fill="none" stroke="#fff" stroke-width="4"/>
+    </svg>
+    <div>
+      <div class="tag"><b>CAPRI</b> / OTHER <span class="run">RUNNING</span></div>
+      <h1 id="t">Claude has been working on capri for 0m 00s.</h1>
+    </div>
+  </div>
+  <hr>
+  <div id="list"></div>
+</div>
+<script>
+  var files=["index.html","capri.css","acting.js","capri.js"];
+  var list=document.getElementById("list");
+  files.forEach(function(f){
+    list.innerHTML+='<div class="row"><i>Edits</i><span>'+f+'</span></div>';
+  });
+  var s=0;
+  setInterval(function(){
+    s++;
+    var m=Math.floor(s/60),r=String(s%60).padStart(2,"0");
+    document.getElementById("t").textContent=
+      "Claude has been working on capri for "+m+"m "+r+"s.";
+  },1000);
+</script>
+</body>
+</html>
